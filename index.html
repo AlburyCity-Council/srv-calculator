@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Estimate your council rates under the proposed Special Rate Variation scenarios." />
+  <title>Rates — SRV Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Neuton:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead__inner">
+      <img class="masthead__crest" src="assets/logo.svg" alt="AlburyCity logo" />
+      <div class="masthead__title">
+        <h1>Special Variation Impact Calculator</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel panel--form" aria-labelledby="form-heading">
+      <h2 id="form-heading" class="panel__heading">Your property</h2>
+      <p class="panel__intro">
+        See how the proposed Special Rate Variation could affect your annual rates across all scenarios and years.
+      </p>
+
+      <form id="rates-form" class="form" novalidate>
+
+        <button type="button" class="form__help-link" id="notice-help-open">
+          How to find your rating category and land value
+        </button>
+
+        <div class="field">
+          <label for="category">Rating category</label>
+          <select id="category" name="category" required>
+            <option value="" disabled selected>Select a category…</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="land-value">Land value <span class="field__label-note">(enter your land value here)</span></label>
+          <div class="field__input-wrap">
+            <span class="field__prefix">$</span>
+            <input
+              type="text"
+              id="land-value"
+              name="land-value"
+              inputmode="numeric"
+              autocomplete="off"
+              placeholder="250,000"
+              required
+            />
+          </div>
+        </div>
+
+
+
+        <button type="submit" class="btn-primary">Calculate</button>
+      </form>
+
+      <details class="disclaimer" open>
+        <summary>About this estimate</summary>
+        <p>
+          Please Note:
+          <ol>
+            <li>This SRV Calculator is provided as an information source only and is an estimate only.</li>
+            <li>The above rates do not include Domestic Waste charges.</li>
+            <li>This estimate does not include eligible pensioner rebates entitled to a discount up to $250 per year.</li>
+            <li>In accordance with legislation, Council used 2022-year valuations provided by the NSW Valuer General to calculate its rating from 1 July 2023 to 30 June 2026. While Council provides this data for convenience, it does not guarantee its accuracy, and Council accepts no responsibility for any errors or omissions. You can access your land values online via the NSW Valuer General's website. It is recommended to use your 1 July 2025 land values for this calculator.</li>
+            <li>Any variation in land value will result in a change to the rates.</li>
+          </ol>
+        </p>
+      </details>
+    </section>
+
+    <section class="panel panel--result" aria-labelledby="result-heading" aria-live="polite">
+      <div class="result__bar">
+        <h2 id="result-heading" class="panel__heading">Estimate</h2>
+        <div class="cadence-toggle" id="cadence-toggle" role="group" aria-label="Show amounts as" hidden>
+          <button type="button" class="cadence-toggle__btn is-active" data-cadence="annual" aria-pressed="true">Annual</button>
+          <button type="button" class="cadence-toggle__btn" data-cadence="weekly" aria-pressed="false">Weekly</button>
+        </div>
+      </div>
+
+      <div id="result" class="result result--empty">
+        <p class="result__placeholder">Your estimate will appear here.</p>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="notice-help" class="notice-help" aria-labelledby="notice-help-title">
+    <div class="notice-help__panel">
+      <div class="notice-help__head">
+        <h2 id="notice-help-title" class="notice-help__title">Finding your rating category and land value</h2>
+        <button type="button" class="notice-help__close" id="notice-help-close" aria-label="Close">&#10005;</button>
+      </div>
+      <div class="notice-help__body">
+        <p class="notice-help__intro">
+          Both appear on the front page of your most recent rates notice.
+        </p>
+        <div class="notice-help__img-wrap">
+          <img
+            src="assets/notice-guide.png"
+            alt="Top section of a sample rates notice. Highlight 1 marks the Particulars of Rates &amp; Charges section where the rating category is listed; highlight 2 marks the Rateable Value box near the top right."
+          />
+          <!-- Callout positions are percentages of the guide image. If the
+               image is replaced, re-check these against the new layout. -->
+          <span class="notice-help__hl" data-n="1" style="left: 4%; top: 80%; width: 54.9%; height: 13.7%;"></span>
+          <span class="notice-help__hl" data-n="2" style="left: 66.8%; top: 56.3%; width: 26.5%; height: 9%;"></span>
+        </div>
+        <ol class="notice-help__steps">
+          <li>
+            <strong>Rating category</strong> — listed on the first line of the
+            <em>Particulars of Rates &amp; Charges</em> section, for example
+            &ldquo;Residential&rdquo; or &ldquo;Business&rdquo;. Select the matching
+            category in the calculator.
+          </li>
+          <li>
+            <strong>Land value</strong> — shown in the <em>Rateable Value</em> box
+            near the top right. This is the unimproved land value determined by the
+            NSW Valuer General; it does not include your house or other improvements.
+          </li>
+        </ol>
+        <p class="notice-help__fallback">
+          Don&rsquo;t have a rates notice handy? Your land value also appears on the
+          Notice of Valuation from the NSW Valuer General, or you can look it up 
+          <a href="https://www.nsw.gov.au/housing-and-construction/land-values-nsw/how-to-find-land-values-nsw" target="_blank" rel="noopener">here</a>.
+        </p>
+      </div>
+    </div>
+  </dialog>
+
+  <footer class="footer">
+    <p>SRV Impact Calculator · <span id="council-name">Council Name</span></p>
+  </footer>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>
