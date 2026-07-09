@@ -283,10 +283,21 @@ const fmtPct = (n) => `${(n * 100).toFixed(1)}%`;
 
 function renderTable({ scenarioResults, baseEntry, baseYear, maxYears, hasPegFill, categoryName, landValue }) {
   const weekly = state.cadence === "weekly";
-  const val = (r) => weekly ? r.weekly : r.annual;
-  const amountLabel = weekly ? "Weekly ordinary rates" : "Annual ordinary rates";
-  const dollarIncreaseLabel = weekly ? "Weekly increase ($)" : "Annual increase ($)";
+  const val = (r) => {
+    if (state.cadence === "weekly") return r.weekly;
+    if (state.cadence === "quarterly") return r.quarterly;
+    return r.annual;
+  }
+  const amountLabel =
+    state.cadence === "weekly" ? "Weekly ordinary rates" :
+    state.cadence === "quarterly" ? "Quarterly ordinary rates" :
+    "Annual ordinary rates";
 
+  const dollarIncreaseLabel =
+    state.cadence === "weekly" ? "Weekly increase ($)" :
+    state.cadence === "quarterly" ? "Quarterly increase ($)" :
+    "Annual increase ($)";
+  
   const label = escapeHtml(categoryName);
 
   const colCount = 1 + 1 + maxYears + 1; // label + base year + years + cumulative
