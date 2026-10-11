@@ -39,14 +39,9 @@ const SCENARIO_DATA = {
       increases: [0.036, 0.036, 0.036],
     },
     {
-      id: "srv-40",
-      name: "Scenario 2 - SRV of 40% over 3 years",
-      increases: [0.14, 0.13, 0.13],
-    },
-    {
-      id: "srv-42",
-      name: "Scenario 3 - SRV of 42% over 2 years",
-      increases: [0.21, 0.21],
+      id: "srv-30",
+      name: "Scenario 2 - SRV of 30% over 2 years",
+      increases: [0.14, 0.14],
     },
   ],
 };
