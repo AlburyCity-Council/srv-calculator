@@ -36,7 +36,7 @@ const SCENARIO_DATA = {
     {
       id: "base",
       name: "Scenario 1 - No SRV",
-      increases: [0.036, 0.036, 0.036],
+      increases: [0.036, 0.036],
     },
     {
       id: "srv-30",
